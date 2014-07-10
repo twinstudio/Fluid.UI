@@ -1,0 +1,56 @@
+/* Les variables du systeme */
+$columns      : 12!default;    //representation des nombre des colonnes
+$gutter       : 30px!default;  //espace entre les bloc
+$tablette     : 768px;         //taille minimal d'une tablette
+$ecran-normal : 992px;         //taille minimal d'un ecran normal
+$ecran-large  : 1200px;        //taille minimal d'un ecran large
+
+// @mixin pour la gestion des suffixes
+@mixin responsive-columns($suffix) {
+	@for $i from 1 through $columns{
+		.#{$suffix}-#{$i}col{width: $i / $columns * 100%}
+	}
+	@for $i from 0 through $columns{
+		.#{$suffix}-tirer-#{$i}{left:$i / $columns * 100%}
+	}
+	@for $i from 0 through $columns{
+		.#{$suffix}-compenser-#{$i}{margin-left:$i / $columns * 100%}
+	}
+	.#{$suffix}-centrer{margin: 0 auto; float: none;}
+	.#{$suffix}-masquer{display: none;}
+	.#{$suffix}-afficher{display: block;}
+}
+.range{
+	margin-right: $gutter * -0.5;
+    margin-left: $gutter * -0.5;
+    @include clearfix;
+}
+%colum{
+	float: left;
+	position: relative;
+	min-height: 1px;
+	padding: 0 $gutter * 0.5;
+}
+
+/* Initialisation des differente classe du GRID */
+@for $i from 1 through $columns{
+	.mobile-#{$i}col, .tablette-#{$i}col, .ecran-normal-#{$i}col, .ecran-large-#{$i}col{@extend %colum}
+}
+
+/* classe de base pour mobile */
+@include responsive-columns('mobile');
+
+/* class de base pour tablette */
+@media only screen and (min-width: $tablette){
+	@include responsive-columns('tablette');
+}
+
+/* class de base pour ecran normal */
+@media only screen and (min-width: $ecran-normal){
+	@include responsive-columns('ecran-normal');
+}
+
+/* class de base pour ecran large */
+@media only screen and (min-width: $ecran-large){
+	@include responsive-columns('ecran-large');
+}

@@ -1,0 +1,21 @@
+@mixin taille_img($nbre-max) {
+	@for $i from 6 through $nbre-max {
+		$taille : $i * 2;
+		.img-taille-#{$taille}{
+			width: #{$taille}px;
+			height: #{$taille}px;
+		}
+	}
+}
+@mixin rounded-taille($nbre-max){
+	@for $i from 6 through $nbre-max {
+		$taille : $i * 2;
+		.ronde-#{$taille}{
+			@include border-radius(#{$taille / 2}px);
+		}
+	}
+}
+
+
+	@include taille_img(62);
+    @include rounded-taille(62);

@@ -1,0 +1,18 @@
+@mixin taille_img($taille) {
+	@for $i from 0 through 10 {
+		@if $i == 0 {
+			.taile#{$taille}{
+				width: #{$taille}px;
+				height: #{$taille}px;
+			}
+		}
+		.taille#{$taille}*2{
+			width: #{$taille * 2}px;
+			height: #{$taille * 2}px;
+		}
+	}
+}
+
+img{
+	@include taille_img(12);
+}
